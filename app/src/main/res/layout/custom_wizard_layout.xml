@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+    <View
+        android:id="@+id/horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/wizard_button_bar"
+        android:background="@android:color/darker_gray"/>
+
+    <!-- Layout for wizard controls -->
+    <LinearLayout
+        android:id="@+id/wizard_button_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+
+        <RelativeLayout
+            android:id="@+id/layout_prev_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/wizard_previous_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/action_previous"
+                android:textAllCaps="true"
+                android:textColor="?android:attr/textColorPrimary"/>
+
+            <ImageView
+                android:id="@+id/image_prev_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/wizard_previous_button"
+                android:layout_alignTop="@+id/wizard_previous_button"
+                android:src="@drawable/finger_point_back"
+                android:layout_toLeftOf="@+id/wizard_previous_button"/>
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            />
+
+        <RelativeLayout
+            android:id="@+id/layout_next_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/wizard_next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/action_next"
+                android:textAllCaps="true"
+                android:textColor="?android:attr/textColorPrimary"/>
+
+            <ImageView
+                android:id="@+id/image_next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/wizard_next_button"
+                android:layout_alignTop="@+id/wizard_next_button"
+                android:layout_toRightOf="@+id/wizard_next_button"
+                android:src="@drawable/finger_point_front"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!--
+            **********************************************************************
+            **You MUST have this ViewPager as the container for wizard's steps  **
+            **********************************************************************
+    -->
+    <android.support.v4.view.ViewPager
+        android:id="@id/step_container"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/horizontal_line"/>
+
+</RelativeLayout>

@@ -19,7 +19,7 @@ import com.coep.puneet.boilerplate.UI.Adapter.ProductListAdapter;
 
 import butterknife.Bind;
 
-public class ViewProduct extends BaseActivity
+public class ViewProductActivity extends BaseActivity
 {
     @Bind(R.id.productsListRecycler) RecyclerView mRecyclerView;
     @Bind(R.id.empty_result_text) TextView mEmptyText;
@@ -86,7 +86,7 @@ public class ViewProduct extends BaseActivity
                     mEmptyText.setVisibility(View.INVISIBLE);
                     mSwipeRefreshLayout.setRefreshing(false);
                     mProgressBar.setVisibility(View.GONE);
-                    mAdapter = new ProductListAdapter(ViewProduct.this, manager.currentArtisanProducts);
+                    mAdapter = new ProductListAdapter(ViewProductActivity.this, manager.currentArtisanProducts);
                     mRecyclerView.setAdapter(mAdapter);
                     mEmptyText.setVisibility(View.INVISIBLE);
 
@@ -96,7 +96,7 @@ public class ViewProduct extends BaseActivity
                 }
                 break;
             case AppConstants.RESULT_PRODUCT_LIST_ERROR:
-                Toast.makeText(ViewProduct.this, "Error in retreiving product list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewProductActivity.this, "Error in retreiving product list", Toast.LENGTH_SHORT).show();
                 mSwipeRefreshLayout.setRefreshing(false);
                 showNoInternetSnackbar();
                 mProgressBar.setVisibility(View.GONE);

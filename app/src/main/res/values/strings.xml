@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Boilerplate</string>
+    <string name="title_activity_add_product">AddProductActivity</string>
+    <string name="hint_name">Product Name</string>
+    <string name="hint_price">Price</string>
+    <string name="hint_quantity">Quantity</string>
+
+    <string name="sample_form_text">This example shows a form which is divided into multiple steps.
+        Hit Next or slide your finger to continue...</string>
+    <string name="sample_form_summary">WizarDroid Context enables sharing data among steps.
+        Summary of input:</string>
+    <string name="sample_form_text2">This is a demonstration of blocking the next step until an action is taken</string>
+    <string name="sample_form_checkbox">Check here to enable the next step</string>
     <string name="title_activity_navigation_grid">NavigationGrid</string>
     <string name="title_activity_view_product">ViewProduct</string>
 </resources>

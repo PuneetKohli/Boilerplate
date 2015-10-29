@@ -60,7 +60,7 @@ public class NavGridAdapter extends BaseAdapter
             gridView = new View(mContext);
 
             // get layout from mobile.xml
-            gridView = inflater.inflate(R.layout.navigation_grid_item, null);
+            gridView = inflater.inflate(R.layout.home_grid_item, null);
 
             // set image based on selected text
             ImageView imageView = (ImageView) gridView

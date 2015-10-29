@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/sample_form_text"
+        android:textSize="20dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:text="Price"
+            android:textSize="20dp"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_product_price"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:hint="@string/hint_price"
+            android:inputType="textNoSuggestions|textPersonName|text"
+            android:maxLines="1"
+            android:minLines="1"
+            android:textSize="20sp"
+            app:met_baseColor="@color/app_primary"
+            app:met_floatingLabel="none"
+            app:met_floatingLabelText="@string/hint_price"
+            app:met_primaryColor="@color/app_primary"
+            app:met_underlineColor="@color/app_primary"/>
+
+        <TextView
+            android:id="@+id/textView_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:text="Quantity"
+            android:textSize="20dp"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_product_quantity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:hint="@string/hint_quantity"
+            android:inputType="textNoSuggestions|textPersonName|text"
+            android:maxLines="1"
+            android:minLines="1"
+            android:textSize="20sp"
+            app:met_baseColor="@color/app_primary"
+            app:met_floatingLabel="none"
+            app:met_floatingLabelText="@string/hint_quantity"
+            app:met_primaryColor="@color/app_primary"
+            app:met_underlineColor="@color/app_primary"/>
+    </LinearLayout>
+
+</RelativeLayout>

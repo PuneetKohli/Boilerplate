@@ -12,7 +12,7 @@ import com.coep.puneet.boilerplate.UI.Adapter.NavGridAdapter;
 
 import butterknife.Bind;
 
-public class NavigationGrid extends BaseActivity
+public class HomeActivity extends BaseActivity
 {
     @Bind(R.id.navGrid) GridView navGrid;
 
@@ -42,7 +42,7 @@ public class NavigationGrid extends BaseActivity
     @Override
     protected int getLayoutResource()
     {
-        return R.layout.activity_navigation_grid;
+        return R.layout.activity_home;
     }
 
     @Override
@@ -66,7 +66,10 @@ public class NavigationGrid extends BaseActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 switch (position) {
-                    case 0: navigator.openNewActivity(NavigationGrid.this, new ViewProduct());
+                    case 0: navigator.openNewActivity(HomeActivity.this, new ViewProductActivity());
+                        break;
+                    case 1: navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
+                        break;
                 }
             }
         });

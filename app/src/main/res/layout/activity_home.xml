@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.coep.puneet.boilerplate.UI.Activity.NavigationGrid">
+    tools:context="com.coep.puneet.boilerplate.UI.Activity.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
@@ -22,5 +22,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_navigation_grid"/>
+        <GridView
+            android:id="@+id/navGrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:numColumns="2">
+        </GridView>
+
+
 </android.support.design.widget.CoordinatorLayout>
