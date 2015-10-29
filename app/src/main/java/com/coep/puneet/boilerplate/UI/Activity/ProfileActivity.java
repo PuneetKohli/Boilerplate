@@ -20,9 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.coep.puneet.boilerplate.Global.AppConstants;
 import com.coep.puneet.boilerplate.R;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -100,6 +102,9 @@ public class ProfileActivity extends BaseActivity
     protected void setupLayout()
     {
         manager.delegate = this;
+        mArtisanProductCount.setText("" + manager.currentArtisanProducts.size());
+        mArtisanName.setText(ParseUser.getCurrentUser().getString("name"));
+        mArtisanLocation.setText("" + ParseUser.getCurrentUser().getString("location"));
         phoneText = ButterKnife.findById(PhoneLayout, R.id.profile_item_text);
         addressText = ButterKnife.findById(AddressLayout, R.id.profile_item_text);
         emailText = ButterKnife.findById(EmailLayout, R.id.profile_item_text);
@@ -113,6 +118,9 @@ public class ProfileActivity extends BaseActivity
         phoneIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
         emailIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_email));
         addressIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_map_grey_24dp));
+
+        ParseFile profile_image = ParseUser.getCurrentUser().getParseFile("profile_image");
+        Glide.with(this).load(profile_image.getUrl()).asBitmap().centerCrop().placeholder(R.drawable.background_material).into(profileImage);
     }
 
     String field = "";
