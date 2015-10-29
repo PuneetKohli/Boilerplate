@@ -138,7 +138,7 @@ public class AddProductStep3_image extends WizardStep
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, stream);
                 byte[] byteArray = stream.toByteArray();
 
-                final ParseFile image = new ParseFile("temp", byteArray);
+                final ParseFile image = new ParseFile("temp.jpg", byteArray);
                 image.saveInBackground(new SaveCallback()
                 {
                     @Override

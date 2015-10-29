@@ -14,13 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coep.puneet.boilerplate.ParseObjects.Category;
+import com.coep.puneet.boilerplate.ParseObjects.Product;
 import com.coep.puneet.boilerplate.R;
 import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep1_category;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep2_name;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep3_image;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep4_price;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.codepond.wizardroid.WizardFlow;
 import org.codepond.wizardroid.WizardFragment;
@@ -260,6 +264,18 @@ public class AddProductWizardFragment extends WizardFragment
     public void onWizardComplete()
     {
         super.onWizardComplete();   //Make sure to first call the super method before anything else
+        final Product product = ((AddProductActivity) getActivity()).manager.currentProduct;
+
+        product.saveEventually(new SaveCallback()
+        {
+            @Override
+            public void done(ParseException e)
+            {
+                ParseUser.getCurrentUser().addUnique("user_products", product);
+                ParseUser.getCurrentUser().saveEventually();
+            }
+        });
+
         //... Access context variables here before terminating the wizard
         //...
         //String fullname = firstname + lastname;
