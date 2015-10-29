@@ -23,4 +23,6 @@ public class Category extends ParseObject
         return ParseQuery.getQuery(Category.class);
     }
 
+    public static boolean isSelected;
+
 }

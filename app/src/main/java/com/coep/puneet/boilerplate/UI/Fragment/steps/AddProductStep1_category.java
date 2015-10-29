@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.GridView;
 
 import com.coep.puneet.boilerplate.R;
+import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
+import com.coep.puneet.boilerplate.UI.Adapter.CategoryGridAdapter;
 
 import org.codepond.wizardroid.WizardStep;
 
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 public class AddProductStep1_category extends WizardStep
 {
 
-    @Bind(R.id.sample_form2_checkbox) CheckBox checkBox;
+    @Bind(R.id.category_grid_view) GridView categoryGridview;
 
     //You must have an empty constructor for every step
     public AddProductStep1_category()
@@ -33,26 +34,10 @@ public class AddProductStep1_category extends WizardStep
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.step_form2, container, false);
+        View v = inflater.inflate(R.layout.step_form_add_category, container, false);
         ButterKnife.bind(this, v);
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if (isChecked)
-                {
-                    //Notify that the step is completed
-                    notifyCompleted();
-                }
-                else
-                {
-                    //Notify that the step is incomplete
-                    notifyIncomplete();
-                }
-            }
-        });
+        categoryGridview.setAdapter(new CategoryGridAdapter(getActivity(), ((AddProductActivity)getActivity()).manager.productCategories));
         return v;
     }
 }

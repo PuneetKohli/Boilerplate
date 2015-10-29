@@ -9,8 +9,8 @@
     tools:context="com.coep.puneet.boilerplate.UI.Activity.AddProductActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -21,15 +21,18 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
+
     <FrameLayout
-                  android:orientation="vertical"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent">
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
         <fragment
             android:id="@+id/form_wizard_fragment"
+            android:name="com.coep.puneet.boilerplate.UI.Fragment.AddProductWizardFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.coep.puneet.boilerplate.UI.Fragment.AddProductWizardFragment"/>
-    </FrameLayout >
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

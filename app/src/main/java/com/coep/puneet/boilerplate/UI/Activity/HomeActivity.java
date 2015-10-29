@@ -14,7 +14,7 @@ import butterknife.Bind;
 
 public class HomeActivity extends BaseActivity
 {
-    @Bind(R.id.navGrid) GridView navGrid;
+    @Bind(R.id.category_grid_view) GridView navGrid;
 
 
     public Integer[] mNavIds = {
@@ -37,6 +37,7 @@ public class HomeActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        manager.delegate = this;
     }
 
     @Override
@@ -65,14 +66,19 @@ public class HomeActivity extends BaseActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                switch (position) {
-                    case 0: navigator.openNewActivity(HomeActivity.this, new ViewProductActivity());
+                switch (position)
+                {
+                    case 0:
+                        navigator.openNewActivity(HomeActivity.this, new ViewProductActivity());
                         break;
-                    case 1: navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
+                    case 1:
+                        navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
                         break;
                 }
             }
         });
+
+        manager.getAllCategory();
     }
 
 

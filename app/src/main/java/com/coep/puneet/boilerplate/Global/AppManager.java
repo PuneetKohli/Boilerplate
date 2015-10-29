@@ -27,7 +27,7 @@ public class AppManager extends Application
 
     private String LOG_TAG = AppManager.class.getCanonicalName();
 
-    public ArrayList<String> productCategories = new ArrayList<>();
+    public ArrayList<Category> productCategories = new ArrayList<>();
     public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
     public AsyncResponse delegate = null;
 
@@ -78,7 +78,7 @@ public class AppManager extends Application
                         });
                         for (int i = 0; i < list.size(); i++)
                         {
-                            productCategories.add(list.get(i).getCategory_name());
+                            productCategories.add(list.get(i));
                         }
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
@@ -108,7 +108,7 @@ public class AppManager extends Application
                     productCategories.clear();
                     for (int i = 0; i < list.size(); i++)
                     {
-                        productCategories.add(list.get(i).getCategory_name());
+                        productCategories.add(list.get(i));
                     }
                     delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
                 }
