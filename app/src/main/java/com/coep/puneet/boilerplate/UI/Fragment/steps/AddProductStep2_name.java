@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ public class AddProductStep2_name extends WizardStep
         View v = inflater.inflate(R.layout.step_form_add_name, container, false);
         ButterKnife.bind(this, v);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("2. Enter Produce Name");
         ((AddProductActivity) getActivity()).manager.currentProduct.setProduct_name("");
         etProductName.setText("");
         etProductName.addTextChangedListener(new TextWatcher()

@@ -4,6 +4,8 @@
     <string name="hint_name">Product Name</string>
     <string name="hint_price">Price</string>
     <string name="hint_quantity">Quantity</string>
+    <string name="textview_image_from_camera">From Camera</string>
+    <string name="textview_image_from_gallery">From Gallery</string>
 
     <string name="sample_form_text">This example shows a form which is divided into multiple steps.
         Hit Next or slide your finger to continue...</string>

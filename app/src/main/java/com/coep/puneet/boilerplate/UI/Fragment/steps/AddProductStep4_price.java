@@ -1,6 +1,7 @@
 package com.coep.puneet.boilerplate.UI.Fragment.steps;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,6 +36,8 @@ public class AddProductStep4_price extends WizardStep
     {
         View v = inflater.inflate(R.layout.step_form_add_price, container, false);
         ButterKnife.bind(this, v);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("4. Add Price and Quantity");
         ((AddProductActivity) getActivity()).manager.currentProduct.setProductQuantity(0);
         ((AddProductActivity) getActivity()).manager.currentProduct.setProductPrice(0);
         etPrice.setText("0");

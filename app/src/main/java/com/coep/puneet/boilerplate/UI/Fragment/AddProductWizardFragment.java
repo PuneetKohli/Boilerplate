@@ -18,7 +18,8 @@ import com.coep.puneet.boilerplate.R;
 import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep1_category;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep2_name;
-import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep3;
+import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep3_image;
+import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep_summary;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep4_price;
 
 import org.codepond.wizardroid.WizardFlow;
@@ -208,7 +209,7 @@ public class AddProductWizardFragment extends WizardFragment
                 Mark this step as 'required', preventing the user from advancing to the next step
                 until a certain action is taken to mark this step as completed by calling WizardStep#notifyCompleted()
                 from the step.
-                 */.addStep(AddProductStep2_name.class).addStep(AddProductStep4_price.class).addStep(AddProductStep3.class).create();
+                 */.addStep(AddProductStep2_name.class).addStep(AddProductStep3_image.class).addStep(AddProductStep4_price.class).create();
     }
 
     /*

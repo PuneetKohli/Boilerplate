@@ -14,6 +14,7 @@
     <color name="app_primary_light">#FFAC78</color>
     <color name="light_grey">#E0E0E0</color>
     <color name="signal_green">#3ece5b</color>
+    <color name="signal_red">#ce4f3e</color>
     <color name="app_accent">#ee602d</color>
 <!--
     <color name="accent_brown">#A6553D</color>

@@ -11,7 +11,7 @@ import com.coep.puneet.boilerplate.R;
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
-public class AddProductStep3 extends WizardStep
+public class AddProductStep_summary extends WizardStep
 {
 
     /**
@@ -27,7 +27,7 @@ public class AddProductStep3 extends WizardStep
 
 
     //You must have an empty constructor for every step
-    public AddProductStep3() {
+    public AddProductStep_summary() {
     }
 
     //Set your layout here
