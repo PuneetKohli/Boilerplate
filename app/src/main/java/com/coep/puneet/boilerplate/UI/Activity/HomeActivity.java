@@ -38,7 +38,7 @@ public class HomeActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         manager.loginArtisan("7507118432");
-        manager.getAllProductsFromCurrentArtisan();
+     //   manager.getAllProductsFromCurrentArtisan();
     }
 
     @Override

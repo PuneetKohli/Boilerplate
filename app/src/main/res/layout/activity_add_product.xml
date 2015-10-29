@@ -21,6 +21,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
+
     <FrameLayout
                   android:orientation="vertical"
                   android:layout_width="fill_parent"

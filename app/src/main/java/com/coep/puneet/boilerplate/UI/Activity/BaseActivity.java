@@ -22,7 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity implements AsyncRes
 {
     @Nullable @Bind(R.id.toolbar) Toolbar toolbar;
     Navigator navigator;
-    AppManager manager;
+    public AppManager manager;
 
 
     AlertDialog dialog;

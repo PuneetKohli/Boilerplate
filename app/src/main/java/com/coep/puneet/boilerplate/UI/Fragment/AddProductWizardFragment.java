@@ -1,29 +1,29 @@
 package com.coep.puneet.boilerplate.UI.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coep.puneet.boilerplate.R;
-import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep2_name;
+import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep1_category;
+import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep2_name;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep3;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep4_price;
 
 import org.codepond.wizardroid.WizardFlow;
 import org.codepond.wizardroid.WizardFragment;
 import org.codepond.wizardroid.persistence.ContextManager;
-import org.codepond.wizardroid.persistence.ContextVariable;
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,15 +44,6 @@ public class AddProductWizardFragment extends WizardFragment
     private String mBackButtonText;
     private ViewPager mViewPager;
 
-    /**
-     * Tell WizarDroid that these are context variables and set default values.
-     * These values will be automatically bound to any field annotated with {@link ContextVariable}.
-     * NOTE: Context Variable names are unique and therefore must
-     * have the same name and type wherever you wish to use them.
-     */
-    @ContextVariable private String firstname = "WizarDroid";
-    @ContextVariable private String lastname = "CondPond.org";
-
     public AddProductWizardFragment()
     {
         super();
@@ -63,10 +54,6 @@ public class AddProductWizardFragment extends WizardFragment
         super(contextManager);
     }
 
-    /*
-        You must override this method and create a wizard flow by
-        using WizardFlow.Builder as shown in this example
-     */
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -97,28 +84,90 @@ public class AddProductWizardFragment extends WizardFragment
         this.previousButton.setText(this.getBackButtonLabel());
         this.nextButton.setEnabled(this.wizard.canGoNext());
         this.nextButton.setText(this.wizard.isLastStep() ? this.getFinishButtonText() : this.getNextButtonLabel());
-        if(this.wizard.isFirstStep())
+        if (this.wizard.isFirstStep())
         {
             this.prevImage.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
         }
-        else
-            this.prevImage.clearColorFilter();
-        if(!this.wizard.canGoNext())
+        else this.prevImage.clearColorFilter();
+        if (!this.wizard.canGoNext())
         {
             this.nextImage.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
         }
-        else
-            this.nextImage.clearColorFilter();
-        if(this.wizard.isLastStep())
-            this.nextImage.setVisibility(View.INVISIBLE);
-        else
-            this.nextImage.setVisibility(View.VISIBLE);
+        else this.nextImage.clearColorFilter();
+        if (this.wizard.isLastStep()) this.nextImage.setVisibility(View.INVISIBLE);
+        else this.nextImage.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.layout_next_button)
     void goNext()
     {
-        this.wizard.goNext();
+
+        int step = this.wizard.getCurrentStepPosition();
+        switch (step)
+        {
+            case 0:
+                this.wizard.goNext();
+                break;
+            case 1:
+                String name = ((AddProductActivity) getActivity()).manager.currentProduct.getProduct_name();
+                if (name.equals(""))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
+                    builder.setTitle("Error");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                    });
+                    builder.setView(customDialogView);
+                    builder.create();
+                    builder.show();
+                }
+                else
+                {
+                    this.wizard.goNext();
+                }
+                break;
+            case 2:
+                int price = ((AddProductActivity) getActivity()).manager.currentProduct.getProductPrice();
+                int quantity = ((AddProductActivity) getActivity()).manager.currentProduct.getProductQuantity();
+                if (price == 0 || quantity == 0)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
+                    final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
+                    if(price == 0 && quantity == 0)
+                        popupEdittext.setText("Please Enter Price and Quantity");
+                    else if(price == 0)
+                        popupEdittext.setText("Please Enter Price");
+                    else
+                        popupEdittext.setText("Please Enter Quantity");
+
+                    builder.setTitle("Error");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                    });
+                    builder.setView(customDialogView);
+                    builder.create();
+                    builder.show();
+                }
+                else
+                {
+                    this.wizard.goNext();
+                }
+                break;
+            case 3:
+                break;
+
+        }
+
     }
 
     @OnClick(R.id.layout_prev_button)

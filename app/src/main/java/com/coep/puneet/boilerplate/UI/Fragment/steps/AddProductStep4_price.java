@@ -3,29 +3,22 @@ package com.coep.puneet.boilerplate.UI.Fragment.steps;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.coep.puneet.boilerplate.R;
+import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 
 import org.codepond.wizardroid.WizardStep;
-import org.codepond.wizardroid.persistence.ContextVariable;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class AddProductStep4_price extends WizardStep
 {
-
-    /**
-     * Tell WizarDroid that these are context variables.
-     * These values will be automatically bound to any field annotated with {@link ContextVariable}.
-     * NOTE: Context Variable names are unique and therefore must
-     * have the same name and type wherever you wish to use them.
-     */
-    @ContextVariable private String firstname;
 
     @Bind(R.id.et_product_price) EditText etPrice;
     @Bind(R.id.et_product_quantity) EditText etQuantity;
@@ -42,10 +35,61 @@ public class AddProductStep4_price extends WizardStep
     {
         View v = inflater.inflate(R.layout.step_form_add_price, container, false);
         ButterKnife.bind(this, v);
-        //Get reference to the textboxes
+        ((AddProductActivity) getActivity()).manager.currentProduct.setProductQuantity(0);
+        ((AddProductActivity) getActivity()).manager.currentProduct.setProductPrice(0);
+        etPrice.setText("0");
+        etQuantity.setText("0");
 
-        //and set default values by using Context Variables
+        etPrice.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                Log.d("blah blahs", s.toString());
+                int price = 0;
+                if (s.toString().equals("")) price = 0;
+                else price = Integer.parseInt(s.toString());
+                ((AddProductActivity) getActivity()).manager.currentProduct.setProductPrice(price);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+
+            }
+        });
+
+        etQuantity.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                int quantity = 0;
+                if(s.toString().equals(""))
+                    quantity = 0;
+                else
+                    quantity = Integer.parseInt(s.toString());
+                ((AddProductActivity) getActivity()).manager.currentProduct.setProductQuantity(quantity);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+
+            }
+        });
         return v;
     }
 
