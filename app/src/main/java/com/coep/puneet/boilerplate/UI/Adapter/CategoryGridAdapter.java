@@ -60,14 +60,14 @@ public class CategoryGridAdapter extends BaseAdapter
             gridView = new View(mContext);
 
             // get layout from mobile.xml
-            gridView = inflater.inflate(R.layout.home_grid_item, null);
+            gridView = inflater.inflate(R.layout.category_grid_item, null);
 
             // set image based on selected text
             ImageView imageView = (ImageView) gridView
-                    .findViewById(R.id.nav_image);
+                    .findViewById(R.id.iv_cat_icon);
 
 
-            TextView textView = (TextView) gridView.findViewById(R.id.nav_label);
+            TextView textView = (TextView) gridView.findViewById(R.id.tv_cat_name);
 
             //imageView.setImageResource(mNavIds[position]);
             //imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height / 4));

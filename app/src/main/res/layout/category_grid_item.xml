@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<!-- the parent view -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!-- the ImageView for the icon -->
+        <ImageView
+            android:id="@+id/iv_cat_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="top|center"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="Description"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/facebook"/>
+
+        <!--  the TextView for the title -->
+        <TextView
+            android:id="@+id/tv_cat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_cat_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:text="Beauty &amp; Cosmetics"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="12dp"
+            />
+
+    </LinearLayout>
+
     <ImageView
-        android:id="@+id/nav_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:src="@android:drawable/ic_media_play"/>
-
-    <TextView
-        android:id="@+id/nav_label"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.8"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:text="Label"/>
-
-
-</LinearLayout>
+        android:id="@+id/selected_tick"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top|center"
+        android:contentDescription="Description"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_check_circle_black_24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        />
+</RelativeLayout>

@@ -82,6 +82,7 @@ public class AppManager extends Application
                         {
                             productCategories.add(list.get(i));
                         }
+                        Log.d("Manager", "Got all category list");
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
                     }
