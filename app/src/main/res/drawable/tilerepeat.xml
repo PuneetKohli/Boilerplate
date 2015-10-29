@@ -1,0 +1,6 @@
+<bitmap
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/swirlbg"
+    android:tileMode="repeat"
+    android:antialias="false"
+    android:dither="false" />

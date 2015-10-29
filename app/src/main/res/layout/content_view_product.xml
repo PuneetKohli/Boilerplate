@@ -5,16 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_navigation_grid"
-    tools:context="com.coep.puneet.boilerplate.UI.Activity.NavigationGrid">
+    tools:showIn="@layout/activity_view_product"
+    tools:context="com.coep.puneet.boilerplate.UI.Activity.ViewProduct">
 
-    <GridView
-        android:id="@+id/navGrid"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:numColumns="2">
-    </GridView>
+
 
 </RelativeLayout>

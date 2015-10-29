@@ -14,7 +14,6 @@ public class MainActivity extends BaseActivity
     {
         //TEST
         super.onCreate(savedInstanceState);
-        manager.loginArtisan("7507118432");
         manager.getAllCategory();
     }
 

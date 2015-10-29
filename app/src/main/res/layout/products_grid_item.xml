@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:gravity="center_vertical|center_horizontal">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/product_card"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        card_view:cardElevation="2dp"
+        android:layout_marginTop="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/img_product_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_above="@+id/tv_species"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo_small"
+                android:layout_gravity="center"/>
+
+            <RelativeLayout
+                android:id="@+id/bottom_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:minHeight="40dp">
+                <TextView
+                    android:id="@+id/tv_product_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Hand made Jute Folders"
+                    android:textColor="@color/app_accent"
+                    android:textSize="14sp"
+                    android:textAlignment="gravity"
+                    android:singleLine="true"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:id="@+id/tv_product_price"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Rs. 376"
+                    android:textColor="@color/app_accent"
+                    android:textSize="12sp"
+                    android:textAlignment="gravity"
+                    android:singleLine="true"
+                    android:fontFamily="sans-serif"
+                    android:layout_below="@+id/tv_product_title"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
