@@ -1,10 +1,13 @@
 package com.coep.puneet.boilerplate.UI.Activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +52,8 @@ public class ViewProduct extends BaseActivity
     @Override
     protected void setupLayout()
     {
+        manager.delegate = this;
+
         mLayoutManager = new GridLayoutManager(this, 2);
         mAdapter = new ProductListAdapter(this, null);
 
@@ -64,7 +69,7 @@ public class ViewProduct extends BaseActivity
             @Override
             public void onRefresh()
             {
-                //makeAPICall();
+                manager.getAllProductsFromCurrentArtisan();
             }
         });
 
@@ -78,13 +83,37 @@ public class ViewProduct extends BaseActivity
             case AppConstants.RESULT_PRODUCT_LIST:
                 if (manager.currentArtisanProducts.size() != 0)
                 {
+                    mEmptyText.setVisibility(View.INVISIBLE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mProgressBar.setVisibility(View.GONE);
+                    mAdapter = new ProductListAdapter(ViewProduct.this, manager.currentArtisanProducts);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mEmptyText.setVisibility(View.INVISIBLE);
 
+                }
+                else {
+                    mEmptyText.setVisibility(View.VISIBLE);
                 }
                 break;
             case AppConstants.RESULT_PRODUCT_LIST_ERROR:
                 Toast.makeText(ViewProduct.this, "Error in retreiving product list", Toast.LENGTH_SHORT).show();
-
+                mSwipeRefreshLayout.setRefreshing(false);
+                showNoInternetSnackbar();
+                mProgressBar.setVisibility(View.GONE);
+                break;
         }
+    }
+
+    void showNoInternetSnackbar()
+    {
+        Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                manager.getAllProductsFromCurrentArtisan();
+            }
+        }).setActionTextColor(Color.GREEN).show();
     }
 
 }

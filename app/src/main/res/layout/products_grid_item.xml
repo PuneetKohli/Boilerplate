@@ -29,7 +29,7 @@
                 android:layout_height="170dp"
                 android:layout_above="@+id/tv_species"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo_small"
+                android:src="@drawable/tilerepeat"
                 android:layout_gravity="center"/>
 
             <RelativeLayout
