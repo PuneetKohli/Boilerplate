@@ -134,7 +134,7 @@ public class AppManager extends Application
                         SharedPreferences.Editor editor = getSharedPreferences("Parse", MODE_PRIVATE).edit();
                         editor.putString("objectId", parseUser.getObjectId());
                         editor.apply();
-                        getAllProductsFromCurrentArtisan();
+                       // getAllProductsFromCurrentArtisan();
                     }
                     else
                     {
@@ -144,7 +144,7 @@ public class AppManager extends Application
             });
         }
         else {
-            getAllProductsFromCurrentArtisanOffline();
+          //  getAllProductsFromCurrentArtisanOffline();
         }
     }
 

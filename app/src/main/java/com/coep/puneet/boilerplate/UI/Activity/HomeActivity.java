@@ -38,6 +38,8 @@ public class HomeActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         manager.delegate = this;
+        manager.loginArtisan("7507118432");
+        manager.getAllProductsFromCurrentArtisan();
     }
 
     @Override
@@ -74,12 +76,11 @@ public class HomeActivity extends BaseActivity
                     case 1:
                         navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
                         break;
+                    case 3: navigator.openNewActivity(HomeActivity.this, new ProfileActivity()); break;
                 }
             }
         });
 
         manager.getAllCategory();
     }
-
-
 }
