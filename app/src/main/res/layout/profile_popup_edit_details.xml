@@ -13,15 +13,12 @@
               android:paddingRight="20dp"
               android:paddingTop="20dp">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Who to meet?"
         android:id="@+id/popup_editText"
-        android:editable="true"
-        android:inputType="textNoSuggestions|textMultiLine"
+        android:text="Enter your Name"
         android:maxLines="3"
-        app:met_primaryColor="@color/app_primary"
         android:layout_marginBottom="16dp"/>
 
 

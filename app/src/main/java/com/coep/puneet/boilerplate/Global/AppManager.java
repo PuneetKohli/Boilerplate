@@ -29,6 +29,7 @@ public class AppManager extends Application
 
     public ArrayList<Category> productCategories = new ArrayList<>();
     public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
+    public Product currentProduct;
     public AsyncResponse delegate = null;
 
 
@@ -43,6 +44,7 @@ public class AppManager extends Application
         cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         ni = cm.getActiveNetworkInfo();
         parseInit();
+        currentProduct = new Product();
     }
 
     private void parseInit() {
@@ -134,7 +136,7 @@ public class AppManager extends Application
                         SharedPreferences.Editor editor = getSharedPreferences("Parse", MODE_PRIVATE).edit();
                         editor.putString("objectId", parseUser.getObjectId());
                         editor.apply();
-                       // getAllProductsFromCurrentArtisan();
+                        getAllProductsFromCurrentArtisan();
                     }
                     else
                     {
@@ -144,7 +146,7 @@ public class AppManager extends Application
             });
         }
         else {
-          //  getAllProductsFromCurrentArtisanOffline();
+            getAllProductsFromCurrentArtisanOffline();
         }
     }
 

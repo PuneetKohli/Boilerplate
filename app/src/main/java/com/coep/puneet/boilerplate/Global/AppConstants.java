@@ -27,6 +27,7 @@ public final class AppConstants
     public static final int RESULT_IMAGE_FULLSCREEN = 1;
     public static final int REQUEST_CAMERA = 2;
     public static final int REQUEST_GALLERY = 3;
+    public static final int RESULT_SPEECH = 4;
 
     //API Constants
     public static final String ACTION_VALIDATE_USER = "validateUser";
@@ -44,4 +45,5 @@ public final class AppConstants
     public static final int EDIT_PRODUCT = 0;
 
     public static final int IMAGE_RESIZE_DIMEN = 800;
+
 }
