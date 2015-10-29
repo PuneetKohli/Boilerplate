@@ -33,7 +33,7 @@ public class ViewProductActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        manager.loginArtisan("7507118432");
+        manager.getAllProductsFromCurrentArtisan();
     }
 
     @Override

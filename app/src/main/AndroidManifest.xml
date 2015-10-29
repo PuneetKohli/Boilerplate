@@ -39,6 +39,11 @@
             android:label="@string/title_activity_view_product"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".UI.Activity.ProfileActivity"
+            android:label="@string/title_activity_view_product"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

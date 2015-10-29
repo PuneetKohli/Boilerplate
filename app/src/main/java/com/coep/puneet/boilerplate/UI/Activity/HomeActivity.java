@@ -37,6 +37,7 @@ public class HomeActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        manager.loginArtisan("7507118432");
     }
 
     @Override
@@ -55,6 +56,7 @@ public class HomeActivity extends BaseActivity
     @Override
     protected void setupLayout()
     {
+        manager.delegate = this;
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height1 = metrics.heightPixels;
@@ -70,10 +72,9 @@ public class HomeActivity extends BaseActivity
                         break;
                     case 1: navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
                         break;
+                    case 3: navigator.openNewActivity(HomeActivity.this, new ProfileActivity()); break;
                 }
             }
         });
     }
-
-
 }
