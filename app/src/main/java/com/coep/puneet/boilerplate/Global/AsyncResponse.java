@@ -5,5 +5,5 @@ package com.coep.puneet.boilerplate.Global;
  */
 public interface AsyncResponse
 {
-    void processFinish(String result, int type);
+    void processFinish(String result, String type);
 }

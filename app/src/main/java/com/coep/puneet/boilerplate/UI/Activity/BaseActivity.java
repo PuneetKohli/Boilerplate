@@ -75,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity implements AsyncRes
     }
 
     @Override
-    public void processFinish(String result, int type)
+    public void processFinish(String result, String type)
     {
     }
 

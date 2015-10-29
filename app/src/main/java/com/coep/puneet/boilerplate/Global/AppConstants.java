@@ -15,7 +15,12 @@ public final class AppConstants
     public static final int TYPE_NEW_CATEGORY_LIST = 1;
     public static final int TYPE_OLD_CATEGORY_LIST = 0;
 
-    public static final String RESULT_CATEGORY_NAME = "resultCategoryName";
+    public static final String RESULT_CATEGORY_LIST = "resultCategoryList";
+    public static final String RESULT_CATEGORY_LIST_ERROR = "resultCategoryListError";
+    public static final String RESULT_PRODUCT_LIST = "resultProductList";
+    public static final String RESULT_PRODUCT_LIST_ERROR = "resultProductListError";
+
+
     public static final String RESULT_SUBCATEGORY_NAME = "resultSubCategoryName";
     public static final String RESULT_SUBSUBCATEGORY_NAME = "resultSubsubCategoryName";
     public static final String RESULT_COLOR_LIST = "resultColorList";
