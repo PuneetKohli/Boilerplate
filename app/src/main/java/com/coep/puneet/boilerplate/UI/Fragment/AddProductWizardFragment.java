@@ -19,12 +19,14 @@ import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep1_category;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep2_name;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep3_image;
-import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep_summary;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep4_price;
+import com.parse.ParseFile;
 
 import org.codepond.wizardroid.WizardFlow;
 import org.codepond.wizardroid.WizardFragment;
 import org.codepond.wizardroid.persistence.ContextManager;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -155,6 +157,47 @@ public class AddProductWizardFragment extends WizardFragment
                 }
                 break;
             case 2:
+                ParseFile file = ((AddProductActivity) getActivity()).manager.currentProduct.getProductImage();
+                ArrayList tags = ((AddProductActivity) getActivity()).manager.currentProduct.getProductTags();
+                if(file.getName().equals("null")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
+                    final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
+                    popupEdittext.setText("Please Upload Image");
+                    builder.setTitle("Error");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                    });
+                    builder.setView(customDialogView);
+                    builder.create();
+                    builder.show();
+                }
+                else if(tags.size() == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
+                    final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
+                    popupEdittext.setText("Please Wait for Tags to load");
+                    builder.setTitle("Error");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                    });
+                    builder.setView(customDialogView);
+                    builder.create();
+                    builder.show();
+                }
+                else {
+                    this.wizard.goNext();
+                }
+                break;
+            case 3:
                 int price = ((AddProductActivity) getActivity()).manager.currentProduct.getProductPrice();
                 int quantity = ((AddProductActivity) getActivity()).manager.currentProduct.getProductQuantity();
                 if (price == 0 || quantity == 0)
@@ -183,8 +226,6 @@ public class AddProductWizardFragment extends WizardFragment
                 {
                     this.wizard.goNext();
                 }
-                break;
-            case 3:
                 break;
 
         }

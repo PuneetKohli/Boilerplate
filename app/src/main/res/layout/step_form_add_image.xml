@@ -123,6 +123,7 @@
             android:layout_weight="0">
 
             <ImageButton
+                android:id="@+id/closeImage"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/signal_red"

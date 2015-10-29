@@ -63,4 +63,9 @@ public class Product extends ParseObject
     {
         return ParseQuery.getQuery(Product.class);
     }
+
+    public void addProductTags(String tag)
+    {
+        addUnique("product_tags", tag);
+    }
 }
