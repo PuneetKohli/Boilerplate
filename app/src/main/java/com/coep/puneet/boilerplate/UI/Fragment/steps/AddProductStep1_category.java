@@ -1,14 +1,11 @@
 package com.coep.puneet.boilerplate.UI.Fragment.steps;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coep.puneet.boilerplate.ParseObjects.Category;
@@ -43,6 +40,7 @@ public class AddProductStep1_category extends WizardStep
     {
         View v = inflater.inflate(R.layout.step_form_add_category, container, false);
         ButterKnife.bind(this, v);
+        ((AddProductActivity) getActivity()).manager.currentProduct.setCategory(new Category());
 
         categoryGridview.setAdapter(new CategoryGridAdapter(getActivity(), ((AddProductActivity) getActivity()).manager.productCategories));
         categoryGridview.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -53,6 +51,7 @@ public class AddProductStep1_category extends WizardStep
                                                         //view.setBackgroundResource(R.color.signal_green);
                                                         if (position == selectedIndex)
                                                         {
+                                                            ((AddProductActivity) getActivity()).manager.currentProduct.setCategory(new Category());
 
                                                             for (int i = 0; i < categoryGridview.getChildCount(); i++)
                                                             {
@@ -70,6 +69,7 @@ public class AddProductStep1_category extends WizardStep
                                                             view.findViewById(R.id.selected_tick).setVisibility(View.VISIBLE);
                                                             TextView currentLetter = (TextView) view.findViewById(R.id.tv_cat_name);
                                                             currentLetter.setTextColor(getResources().getColor(R.color.app_primary));
+                                                            ((AddProductActivity) getActivity()).manager.currentProduct.setCategory(((AddProductActivity) getActivity()).manager.productCategories.get(selectedIndex));
                                                             //ImageView currentImage = (ImageView) view.findViewById(R.id.ivIcon);
                                                             //currentImage.getDrawable().setColorFilter(0xFFFF5722, PorterDuff.Mode.SRC_ATOP);
 

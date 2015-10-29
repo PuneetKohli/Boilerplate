@@ -10,10 +10,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.coep.puneet.boilerplate.ParseObjects.Category;
 import com.coep.puneet.boilerplate.R;
 import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep1_category;
@@ -106,7 +106,29 @@ public class AddProductWizardFragment extends WizardFragment
         switch (step)
         {
             case 0:
-                this.wizard.goNext();
+                Category category = ((AddProductActivity) getActivity()).manager.currentProduct.getCategory();
+                if (category.getCategory_name() == null)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = LayoutInflater.from(getActivity());
+                    View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
+                    final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
+                    popupEdittext.setText("Please Select 1 Category");
+                    builder.setTitle("Error");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                    });
+                    builder.setView(customDialogView);
+                    builder.create();
+                    builder.show();
+                }
+                else
+                {
+                    this.wizard.goNext();
+                }
                 break;
             case 1:
                 String name = ((AddProductActivity) getActivity()).manager.currentProduct.getProduct_name();
@@ -140,12 +162,10 @@ public class AddProductWizardFragment extends WizardFragment
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
                     View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
                     final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
-                    if(price == 0 && quantity == 0)
+                    if (price == 0 && quantity == 0)
                         popupEdittext.setText("Please Enter Price and Quantity");
-                    else if(price == 0)
-                        popupEdittext.setText("Please Enter Price");
-                    else
-                        popupEdittext.setText("Please Enter Quantity");
+                    else if (price == 0) popupEdittext.setText("Please Enter Price");
+                    else popupEdittext.setText("Please Enter Quantity");
 
                     builder.setTitle("Error");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
@@ -183,7 +203,7 @@ public class AddProductWizardFragment extends WizardFragment
                 /*
                 Add your steps in the order you want them to appear and eventually call create()
                 to create the wizard flow.
-                 */.addStep(AddProductStep1_category.class, true)
+                 */.addStep(AddProductStep1_category.class)
                 /*
                 Mark this step as 'required', preventing the user from advancing to the next step
                 until a certain action is taken to mark this step as completed by calling WizardStep#notifyCompleted()

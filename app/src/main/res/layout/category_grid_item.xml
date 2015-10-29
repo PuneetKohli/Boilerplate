@@ -60,6 +60,7 @@
         android:layout_gravity="top|center"
         android:contentDescription="Description"
         android:focusable="false"
+        android:visibility="invisible"
         android:focusableInTouchMode="false"
         android:scaleType="fitXY"
         android:src="@drawable/ic_check_circle_black_24dp"

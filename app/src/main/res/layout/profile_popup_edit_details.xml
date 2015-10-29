@@ -17,7 +17,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/popup_editText"
-        android:text="Enter your Name"
+        android:text="Please Enter Product Name"
         android:maxLines="3"
         android:layout_marginBottom="16dp"/>
 
