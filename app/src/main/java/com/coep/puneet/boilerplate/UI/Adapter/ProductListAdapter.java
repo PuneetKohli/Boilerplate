@@ -52,6 +52,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
     }
 
+    public void clear()
+    {
+        mData.clear();
+    }
+
     public VHProduct onCreateViewHolder(ViewGroup parent, int viewType)
     {
         final View view = LayoutInflater.from(mContext).inflate(R.layout.products_grid_item, parent, false);
