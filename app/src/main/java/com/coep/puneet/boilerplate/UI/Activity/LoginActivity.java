@@ -13,12 +13,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.coep.puneet.boilerplate.Global.AppConstants;
+import com.coep.puneet.boilerplate.Global.SendUnicodeSms;
 import com.coep.puneet.boilerplate.R;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,9 +36,9 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @NotEmpty @Bind(R.id.editText_phone_no) EditText mPhoneEditText;
     @NotEmpty @Bind(R.id.editText_password) EditText mPasswordEditText;
     @Bind(R.id.progress_login) ProgressBar mProgressLogin;
-    @Bind(R.id.progress_validate_number) ProgressBar mProgressValidate;
+    /*@Bind(R.id.progress_validate_number) ProgressBar mProgressValidate;
     @Bind(R.id.imageview_validation) ImageView mImageValidate;
-
+*/
     private Validator loginValidator;
     private SharedPreferences settings;
 
@@ -84,10 +86,10 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @Override
     protected void setupLayout()
     {
-        mLoginButtonFrame.setVisibility(View.GONE);
+/*        mLoginButtonFrame.setVisibility(View.GONE);
         mProgressValidate.setVisibility(View.GONE);
         mImageValidate.setVisibility(View.GONE);
-        mPasswordEditText.setVisibility(View.GONE);
+        mPasswordEditText.setVisibility(View.GONE);*/
         mPhoneEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
@@ -125,16 +127,19 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
     void sendOtpSMS()
     {
-        SmsManager smsManager = SmsManager.getDefault();
+        /*SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);
+*/
+        SendUnicodeSms.sendSms("9819954448");
     }
 
     void showOtpField()
     {
-        mImageValidate.setVisibility(View.VISIBLE);
-        mPasswordEditText.setVisibility(View.VISIBLE);
-        mLoginButtonFrame.setVisibility(View.VISIBLE);
+/*        mImageValidate.setVisibility(View.VISIBLE);
         mProgressValidate.setVisibility(View.GONE);
+        mPasswordEditText.setVisibility(View.VISIBLE);
+        mLoginButtonFrame.setVisibility(View.VISIBLE);*/
+
     }
 
 

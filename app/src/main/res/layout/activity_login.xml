@@ -53,55 +53,25 @@
                 android:padding="16dp"
                 >
 
-                <LinearLayout
-                    android:id="@+id/phonenumber_layout"
-                    android:layout_width="match_parent"
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/editText_phone_no"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/editText_phone_no"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autoText="false"
-                        android:editable="true"
-                        android:elegantTextHeight="false"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:hint="Login ID"
-                        android:inputType="textNoSuggestions|phone|text"
-                        android:lines="1"
-                        android:maxLines="1"
-                        android:minLines="1"
-                        android:text="9819954448"
-                        app:met_baseColor="@color/white"
-                        app:met_floatingLabel="highlight"
-                        app:met_floatingLabelText="Login ID"
-                        app:met_primaryColor="@color/white"
-                        app:met_underlineColor="@color/white"/>
-
-                    <ProgressBar
-                        android:id="@+id/progress_validate_number"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_weight="0"
-                        android:indeterminate="true"
-                        android:layout_gravity="center_vertical"/>
-
-                    <ImageView
-                        android:id="@+id/imageview_validation"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0"
-                        android:visibility="visible"/>
-
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:autoText="false"
+                    android:editable="true"
+                    android:elegantTextHeight="false"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="@string/hint_phone"
+                    android:inputType="textNoSuggestions|phone"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    app:met_baseColor="@color/white"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="@string/hint_phone"
+                    app:met_primaryColor="@color/white"
+                    app:met_underlineColor="@color/white"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/editText_password"
@@ -112,17 +82,18 @@
                     android:editable="true"
                     android:elegantTextHeight="false"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="Password"
-                    android:inputType="textNoSuggestions|number|text"
+                    android:hint="@string/hint_password"
+                    android:inputType="textNoSuggestions|number"
                     android:lines="1"
                     android:maxLines="1"
                     android:minLines="1"
-                    android:text="Test123"
                     app:met_baseColor="@color/white"
                     app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="Password"
+                    app:met_floatingLabelText="@string/hint_password"
                     app:met_primaryColor="@color/white"
                     app:met_underlineColor="@color/white"/>
+
+
             </LinearLayout>
 
         </LinearLayout>

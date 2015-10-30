@@ -15,4 +15,6 @@
     <string name="sample_form_checkbox">Check here to enable the next step</string>
     <string name="title_activity_navigation_grid">NavigationGrid</string>
     <string name="title_activity_view_product">ViewProduct</string>
+    <string name="hint_phone">Mobile number</string>
+    <string name="hint_password">One time password (OTP)</string>
 </resources>
