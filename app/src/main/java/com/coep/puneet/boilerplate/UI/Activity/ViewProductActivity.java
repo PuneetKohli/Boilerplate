@@ -62,6 +62,7 @@ public class ViewProductActivity extends BaseActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        mProgressBar.setVisibility(View.GONE);
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.app_primary, R.color.signal_green);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
@@ -86,8 +87,10 @@ public class ViewProductActivity extends BaseActivity
                     mEmptyText.setVisibility(View.INVISIBLE);
                     mSwipeRefreshLayout.setRefreshing(false);
                     mProgressBar.setVisibility(View.GONE);
-                    mAdapter = new ProductListAdapter(ViewProductActivity.this, manager.currentArtisanProducts);
-                    mRecyclerView.setAdapter(mAdapter);
+                    mAdapter.clear();
+                    for(int i = 0; i < manager.currentArtisanProducts.size(); i++) {
+                        mAdapter.add(manager.currentArtisanProducts.get(i), i);
+                    }
                     mEmptyText.setVisibility(View.INVISIBLE);
 
                 }

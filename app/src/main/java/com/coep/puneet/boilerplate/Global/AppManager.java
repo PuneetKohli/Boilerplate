@@ -142,6 +142,7 @@ public class AppManager extends Application
                     else
                     {
                         Log.d(LOG_TAG, e.getMessage());
+                        getAllProductsFromCurrentArtisanOffline();
                     }
                 }
             });

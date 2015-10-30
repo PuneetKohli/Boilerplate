@@ -17,9 +17,6 @@ import com.coep.puneet.boilerplate.R;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-/**
- * Created by Puneet on 30-10-2015.
- */
 public class LoginActivity extends BaseActivity
 {
     @Bind(R.id.loginButtonFrame) FrameLayout mLoginButtonFrame;
@@ -123,7 +120,6 @@ public class LoginActivity extends BaseActivity
                 break;
             case AppConstants.RESULT_PRODUCT_LIST_ERROR:
                 Toast.makeText(LoginActivity.this, "Error in Logging In", Toast.LENGTH_SHORT).show();
-
                 break;
         }
     }
