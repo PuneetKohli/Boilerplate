@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/sample_form_text"
+        android:text="@string/description_upload_image"
         android:textSize="20dp"/>
 
     <LinearLayout
@@ -104,10 +104,6 @@
             android:id="@+id/image_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/button_frame_delete"
-            android:layout_alignLeft="@+id/container_layout_menu"
-            android:layout_alignRight="@+id/container_layout_menu"
-            android:layout_alignTop="@+id/container_layout_menu"
             android:layout_weight="1"
             android:src="@drawable/quila"
             android:scaleType="centerCrop"/>
@@ -116,9 +112,6 @@
             android:id="@+id/button_frame_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/container_layout_menu"
-            android:layout_alignLeft="@+id/container_layout_menu"
-            android:layout_alignRight="@+id/container_layout_menu"
             android:background="?attr/selectableItemBackground"
             android:layout_weight="0">
 

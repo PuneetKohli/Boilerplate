@@ -2,6 +2,7 @@ package com.coep.puneet.boilerplate.UI.Activity;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,7 +25,7 @@ public class AddProductActivity extends BaseActivity
             {
                 if (status == TextToSpeech.SUCCESS && tts != null) {
 
-                    say("abcd");
+                    say("hello world");
                     //
                     // OnUtteranceCompletedListener
                     //
@@ -72,5 +73,19 @@ public class AddProductActivity extends BaseActivity
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+
+
+        //Close the Text to Speech Library
+        if(tts != null) {
+
+            tts.stop();
+            tts.shutdown();
+            Log.d("AddProduct", "TTS Destroyed");
+        }
+        super.onDestroy();
     }
 }

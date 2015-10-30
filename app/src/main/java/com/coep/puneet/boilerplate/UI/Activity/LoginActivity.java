@@ -86,6 +86,9 @@ public class LoginActivity extends BaseActivity
                 }
             }
         });
+
+        manager.getAllCategory();
+
     }
 
     boolean validatePhoneNumber()
@@ -97,8 +100,7 @@ public class LoginActivity extends BaseActivity
     {
         /*SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);
-*/
-        SendUnicodeSms.sendSms("9819954448");
+        SendUnicodeSms.sendSms("9819954448");*/
     }
 
     void showOtpField()
@@ -115,11 +117,13 @@ public class LoginActivity extends BaseActivity
     {
         switch (type)
         {
-            case AppConstants.RESULT_PRODUCT_LIST:
+            case AppConstants.RESULT_LOGIN_SUCCESS:
+                manager.getAllProductsFromCurrentArtisan();
                 openNextActivity();
                 break;
-            case AppConstants.RESULT_PRODUCT_LIST_ERROR:
+            case AppConstants.RESULT_LOGIN_FAIL:
                 Toast.makeText(LoginActivity.this, "Error in Logging In", Toast.LENGTH_SHORT).show();
+                resetButton();
                 break;
         }
     }
@@ -128,12 +132,12 @@ public class LoginActivity extends BaseActivity
     {
         navigator.openNewActivity(LoginActivity.this, new HomeActivity());
         mProgressLogin.setVisibility(View.INVISIBLE);
-        mLoginButton.setText("LOG IN");
+        mLoginButton.setText(getString(R.string.login));
     }
 
     void resetButton()
     {
         mProgressLogin.setVisibility(View.INVISIBLE);
-        mLoginButton.setText("LOG IN");
+        mLoginButton.setText(getString(R.string.login));
     }
 }

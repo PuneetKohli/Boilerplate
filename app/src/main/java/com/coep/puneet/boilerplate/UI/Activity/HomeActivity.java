@@ -6,7 +6,9 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import com.coep.puneet.boilerplate.Global.AppConstants;
 import com.coep.puneet.boilerplate.R;
 import com.coep.puneet.boilerplate.UI.Adapter.NavGridAdapter;
 
@@ -28,7 +30,6 @@ public class HomeActivity extends BaseActivity
             R.drawable.bs_ic_more_light
     };
 
-    public String[] mNavLabels = {"1", "2", "3", "4", "5", "6", "7", "8"};
 
 
 
@@ -38,8 +39,7 @@ public class HomeActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         manager.delegate = this;
-        manager.loginArtisan("7507118432");
-     //   manager.getAllProductsFromCurrentArtisan();
+        //manager.loginArtisan("7507118432");
     }
 
     @Override
@@ -61,6 +61,7 @@ public class HomeActivity extends BaseActivity
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height1 = metrics.heightPixels;
+        String[] mNavLabels = {getString(R.string.home_button_1), getString(R.string.home_button_2), getString(R.string.home_button_3), getString(R.string.home_button_4), getString(R.string.home_button_5), getString(R.string.home_button_6), getString(R.string.home_button_7), getString(R.string.home_button_8)};
         navGrid.setAdapter(new NavGridAdapter(this, mNavIds, mNavLabels, height1));
 
         navGrid.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -76,11 +77,11 @@ public class HomeActivity extends BaseActivity
                     case 1:
                         navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
                         break;
-                    case 3: navigator.openNewActivity(HomeActivity.this, new ProfileActivity()); break;
+                    case 3:
+                        navigator.openNewActivity(HomeActivity.this, new ProfileActivity());
+                        break;
                 }
             }
         });
-
-        manager.getAllCategory();
     }
 }

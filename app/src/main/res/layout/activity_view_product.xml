@@ -28,11 +28,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="78dp"
         android:gravity="center"
-        android:text="You have not uploaded any products yet!"
+        android:text="@string/no_product_empty_text"
         android:textAlignment="gravity"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/app_primary"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:visibility="invisible"/>
 
     <ProgressBar

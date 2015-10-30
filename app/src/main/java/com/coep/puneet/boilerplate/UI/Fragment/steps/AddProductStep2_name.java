@@ -57,7 +57,6 @@ public class AddProductStep2_name extends WizardStep
         View v = inflater.inflate(R.layout.step_form_add_name, container, false);
         ButterKnife.bind(this, v);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("2. Enter Produce Name");
         ((AddProductActivity) getActivity()).manager.currentProduct.setProduct_name("");
         etProductName.setText("");
         etProductName.addTextChangedListener(new TextWatcher()

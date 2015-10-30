@@ -47,14 +47,16 @@ public class AppManager extends Application
         currentProduct = new Product();
     }
 
-    private void parseInit() {
+    private void parseInit()
+    {
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Product.class);
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "A2M7yTjp5iULp8xiFXymM29yX2U9bHEKhJdcsJEN", "L7WlExlZM9DoWNQkCCxY8uf7ummyn6cy1yrhnU7U");
     }
 
-    public void getAllCategory() {
+    public void getAllCategory()
+    {
 
         if ((ni != null) && (ni.isConnected()))
         {
@@ -65,11 +67,14 @@ public class AppManager extends Application
                 @Override
                 public void done(final List<Category> list, ParseException e)
                 {
-                    if(e == null)
+                    if (e == null)
                     {
-                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback() {
-                            public void done(ParseException e) {
-                                if (e != null) {
+                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback()
+                        {
+                            public void done(ParseException e)
+                            {
+                                if (e != null)
+                                {
                                     Log.d(LOG_TAG, e.getMessage());
                                     return;
                                 }
@@ -86,18 +91,21 @@ public class AppManager extends Application
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
                     }
-                    else {
+                    else
+                    {
                         Log.d(LOG_TAG, e.getMessage());
                     }
                 }
             });
         }
-        else {
+        else
+        {
             getAllCategoryLocal();
         }
     }
 
-    private void getAllCategoryLocal() {
+    private void getAllCategoryLocal()
+    {
         ParseQuery<Category> query = Category.getQuery();
         query.orderByAscending("category_name");
         query.fromPin("category_list");
@@ -123,8 +131,8 @@ public class AppManager extends Application
         });
     }
 
-    public void loginArtisan(String mobile) {
-
+    public void loginArtisan(String mobile)
+    {
         if ((ni != null) && (ni.isConnected()))
         {
             ParseUser.logInInBackground(mobile, "password", new LogInCallback()
@@ -137,18 +145,22 @@ public class AppManager extends Application
                         SharedPreferences.Editor editor = getSharedPreferences("Parse", MODE_PRIVATE).edit();
                         editor.putString("objectId", parseUser.getObjectId());
                         editor.apply();
-                        getAllProductsFromCurrentArtisan();
+                        Log.d("Manager", "Login complete");
+                        delegate.processFinish(LOG_TAG, AppConstants.RESULT_LOGIN_SUCCESS);
+                        //getAllProductsFromCurrentArtisan();
                     }
                     else
                     {
                         Log.d(LOG_TAG, e.getMessage());
-                        getAllProductsFromCurrentArtisanOffline();
+                        delegate.processFinish(LOG_TAG, AppConstants.RESULT_LOGIN_FAIL);
+                        //getAllProductsFromCurrentArtisanOffline();
                     }
                 }
             });
         }
-        else {
-            getAllProductsFromCurrentArtisanOffline();
+        else
+        {
+            //getAllProductsFromCurrentArtisanOffline();
         }
     }
 
@@ -184,17 +196,19 @@ public class AppManager extends Application
                         });
                         currentArtisanProducts.clear();
                         currentArtisanProducts.addAll(currentProducts);
+                        Log.d("Manager", "Product list fetched with size " + currentArtisanProducts.size());
                         delegate.processFinish("manager", AppConstants.RESULT_PRODUCT_LIST);
                     }
                     else
                     {
-                        getAllProductsFromCurrentArtisanOffline();
+                        //getAllProductsFromCurrentArtisanOffline();
                     }
                 }
             });
         }
-        else {
-            getAllProductsFromCurrentArtisanOffline();
+        else
+        {
+            //getAllProductsFromCurrentArtisanOffline();
         }
     }
 
@@ -203,7 +217,8 @@ public class AppManager extends Application
         SharedPreferences prefs = getSharedPreferences("Parse", MODE_PRIVATE);
         String restoredText = prefs.getString("objectId", null);
         String objectId = null;
-        if (restoredText != null) {
+        if (restoredText != null)
+        {
             objectId = prefs.getString("objectId", "");//"No name defined" is the default value.
         }
 

@@ -95,7 +95,6 @@ public class AddProductStep3_image extends WizardStep
         ParseFile a = new ParseFile("null", data);
         ((AddProductActivity) getActivity()).manager.currentProduct.setProductImage(a);
         ((AddProductActivity) getActivity()).manager.currentProduct.setProductTags(new ArrayList<String>());
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("3. Upload Image");
         containerViewPreview.setVisibility(View.INVISIBLE);
         return v;
     }

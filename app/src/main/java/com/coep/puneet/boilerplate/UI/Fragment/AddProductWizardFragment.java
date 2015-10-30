@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,7 +70,6 @@ public class AddProductWizardFragment extends WizardFragment
 
         this.nextButton.setText(this.getNextButtonLabel());
         this.previousButton.setText(this.getBackButtonLabel());
-
         return rootView;
     }
 
@@ -81,6 +81,26 @@ public class AddProductWizardFragment extends WizardFragment
 
     public void onStepChanged()
     {
+        String s =  ((AppCompatActivity) getActivity()).getSupportActionBar().getTitle().toString();
+        switch (this.wizard.getCurrentStepPosition())
+        {
+            case 0:
+                s = getString(R.string.title_add_product_1);
+                break;
+            case 1:
+                s = getString(R.string.title_add_product_2);
+                break;
+
+            case 2:
+                s = getString(R.string.title_add_product_3);
+                break;
+            case 3:
+                s = getString(R.string.title_add_product_4);
+                break;
+            default:
+                break;
+        }
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(s);
         super.onStepChanged();
         this.updateWizardControls();
     }
@@ -95,14 +115,26 @@ public class AddProductWizardFragment extends WizardFragment
         {
             this.prevImage.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
         }
-        else this.prevImage.clearColorFilter();
+        else
+        {
+            this.prevImage.clearColorFilter();
+        }
         if (!this.wizard.canGoNext())
         {
             this.nextImage.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
         }
-        else this.nextImage.clearColorFilter();
-        if (this.wizard.isLastStep()) this.nextImage.setVisibility(View.INVISIBLE);
-        else this.nextImage.setVisibility(View.VISIBLE);
+        else
+        {
+            this.nextImage.clearColorFilter();
+        }
+        if (this.wizard.isLastStep())
+        {
+            this.nextImage.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            this.nextImage.setVisibility(View.VISIBLE);
+        }
     }
 
     @OnClick(R.id.layout_next_button)
@@ -163,7 +195,8 @@ public class AddProductWizardFragment extends WizardFragment
             case 2:
                 ParseFile file = ((AddProductActivity) getActivity()).manager.currentProduct.getProductImage();
                 ArrayList tags = ((AddProductActivity) getActivity()).manager.currentProduct.getProductTags();
-                if(file.getName().equals("null")) {
+                if (file.getName().equals("null"))
+                {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
                     View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
@@ -180,7 +213,8 @@ public class AddProductWizardFragment extends WizardFragment
                     builder.create();
                     builder.show();
                 }
-                else if(tags.size() == 0) {
+                else if (tags.size() == 0)
+                {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     LayoutInflater inflater = LayoutInflater.from(getActivity());
                     View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
@@ -197,7 +231,8 @@ public class AddProductWizardFragment extends WizardFragment
                     builder.create();
                     builder.show();
                 }
-                else {
+                else
+                {
                     this.wizard.goNext();
                 }
                 break;
@@ -211,9 +246,17 @@ public class AddProductWizardFragment extends WizardFragment
                     View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
                     final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
                     if (price == 0 && quantity == 0)
+                    {
                         popupEdittext.setText("Please Enter Price and Quantity");
-                    else if (price == 0) popupEdittext.setText("Please Enter Price");
-                    else popupEdittext.setText("Please Enter Quantity");
+                    }
+                    else if (price == 0)
+                    {
+                        popupEdittext.setText("Please Enter Price");
+                    }
+                    else
+                    {
+                        popupEdittext.setText("Please Enter Quantity");
+                    }
 
                     builder.setTitle("Error");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener()

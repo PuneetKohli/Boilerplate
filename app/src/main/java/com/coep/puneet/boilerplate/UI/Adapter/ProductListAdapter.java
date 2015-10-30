@@ -55,6 +55,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void clear()
     {
         mData.clear();
+        notifyDataSetChanged();
     }
 
     public VHProduct onCreateViewHolder(ViewGroup parent, int viewType)
