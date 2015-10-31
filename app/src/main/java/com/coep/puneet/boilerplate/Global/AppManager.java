@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.coep.puneet.boilerplate.ParseObjects.Category;
+import com.coep.puneet.boilerplate.ParseObjects.Events;
 import com.coep.puneet.boilerplate.ParseObjects.Product;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -46,6 +47,7 @@ public class AppManager extends Application
     NetworkInfo ni;
     public Bitmap currentBm;
     public ParseUser currentArtisanSelected;
+    public ArrayList<Events> eventList = new ArrayList<>();
 
 
     @Override
@@ -95,6 +97,7 @@ public class AppManager extends Application
 
     private void parseInit()
     {
+        ParseObject.registerSubclass(Events.class);
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Product.class);
         Parse.enableLocalDatastore(this);
@@ -330,5 +333,38 @@ public class AppManager extends Application
                 }
             }
         });
+    }
+
+    public void getAllEvents()
+    {
+        if ((ni != null) && (ni.isConnected()))
+        {
+            ParseQuery<Events> query = Events.getQuery();
+
+            query.findInBackground(new FindCallback<Events>()
+            {
+                @Override
+                public void done(final List<Events> events, ParseException e)
+                {
+                    if (e == null)
+                    {
+                        for (int i = 0; i < events.size(); i++)
+                        {
+
+                            eventList.add(events.get(i));
+                        }
+                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    }
+                    else
+                    {
+                        //getAllProductsFromCurrentArtisanOffline();
+                    }
+                }
+            });
+        }
+        else
+        {
+            //getAllProductsFromCurrentArtisanOffline();
+        }
     }
 }

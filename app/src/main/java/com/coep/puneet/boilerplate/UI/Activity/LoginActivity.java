@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity
 
         manager.getAllCategory();
         manager.getAllArtisans();
+        manager.getAllEvents();
 
     }
 

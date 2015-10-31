@@ -78,6 +78,10 @@ public class HomeActivity extends BaseActivity
                         break;
                     case 4:
                         navigator.openNewActivity(HomeActivity.this, new ArtisanSearch());
+                        break;
+                    case 5:
+                        navigator.openNewActivity(HomeActivity.this, new EventSearch());
+                        break;
                 }
             }
         });
