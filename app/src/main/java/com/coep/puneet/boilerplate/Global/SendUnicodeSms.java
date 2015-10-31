@@ -53,7 +53,7 @@ public class SendUnicodeSms {
         ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("From", "09243422233"));
         postParameters.add(new BasicNameValuePair("To", number));
-        String body = "Magic. Do not touch.";
+        String body = "Dear, Your OTP is 59428 to log into Artisell App";
         String out = new String(body.getBytes("UTF-8"), "ISO-8859-1");
         postParameters.add(new BasicNameValuePair("Body", out));
 

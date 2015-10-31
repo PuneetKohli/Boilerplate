@@ -31,6 +31,7 @@ public class LoginActivity extends BaseActivity
         mLoginButton.setText("");
         mProgressLogin.setVisibility(View.VISIBLE);
         manager.loginArtisan(mPhoneEditText.getText().toString());
+
     }
 
     @Override
@@ -99,8 +100,8 @@ public class LoginActivity extends BaseActivity
     void sendOtpSMS()
     {
         /*SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);
-        SendUnicodeSms.sendSms("9819954448");*/
+        smsManager.sendTextMessage("+919819954448", null, "OTP is 5490", null, null);*/
+        SendUnicodeSms.sendSms("9819954448");
     }
 
     void showOtpField()

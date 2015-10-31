@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".UI.Activity.LoginActivity"
-            android:label="@string/title_activity_view_product"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,27 +31,27 @@
         </activity>
         <activity
             android:name=".UI.Activity.HomeActivity"
-            android:label="@string/title_activity_navigation_grid"
-            android:theme="@style/AppTheme" >
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".UI.Activity.ViewProductActivity"
-            android:label="@string/title_activity_view_product"
-            android:theme="@style/AppTheme" >
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".UI.Activity.AddProductActivity"
-            android:label="@string/title_activity_view_product"
-            android:theme="@style/AppTheme" >
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".UI.Activity.ProfileActivity"
-            android:label="@string/title_activity_view_product"
-            android:theme="@style/AppTheme" >
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".UI.Activity.ProductDetailedActivity"
-            android:label="@string/title_activity_product_detailed"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme" >
         </activity>
     </application>

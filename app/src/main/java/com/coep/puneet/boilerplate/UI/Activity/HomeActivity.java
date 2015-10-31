@@ -83,7 +83,7 @@ public class HomeActivity extends BaseActivity
 
     private void setLanguage()
     {
-        new BottomSheet.Builder(this).title("Change Language").sheet(R.menu.menu_change_language).listener(new DialogInterface.OnClickListener()
+        new BottomSheet.Builder(this).title(getString(R.string.change_language)).sheet(R.menu.menu_change_language).listener(new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
@@ -91,23 +91,22 @@ public class HomeActivity extends BaseActivity
                 switch (which)
                 {
                     case R.id.english:
-                        //manager.setLocale("en");
-                        //restartActivity();
+                        manager.setLocale("en");
+                        restartActivity();
                         break;
                     case R.id.hindi:
-                        //manager.setLocale("hi");
-                        //restartActivity();
+                        manager.setLocale("hi");
+                        restartActivity();
                         break;
                 }
             }
         }).show();
     }
 
-    private void restartActivity()
-    {
-        overridePendingTransition(0, 0);
+    private void restartActivity() {
         finish();
         startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
 
