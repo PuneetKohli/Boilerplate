@@ -1,12 +1,16 @@
 package com.coep.puneet.boilerplate.UI.Activity;
 
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.cocosw.bottomsheet.BottomSheet;
 import com.coep.puneet.boilerplate.R;
@@ -17,6 +21,7 @@ import butterknife.Bind;
 public class HomeActivity extends BaseActivity
 {
     @Bind(R.id.category_grid_view) GridView navGrid;
+    private Boolean exit = false;
 
 
     public Integer[] mNavIds = {R.drawable.bs_ic_clear, R.drawable.bs_ic_more, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light};
@@ -98,9 +103,36 @@ public class HomeActivity extends BaseActivity
         }).show();
     }
 
-    private void restartActivity() {
+    private void restartActivity()
+    {
         overridePendingTransition(0, 0);
         finish();
         startActivity(getIntent());
     }
-}
+
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onBackPressed()
+    {
+
+        if (exit)
+        {
+            this.finishAffinity();
+        }
+        else
+        {
+            Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    exit = false;
+                }
+            }, 3 * 1000);
+        }
+    }
+};
+
