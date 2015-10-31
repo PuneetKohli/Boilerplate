@@ -1,6 +1,7 @@
 package com.coep.puneet.boilerplate.UI.Fragment.steps;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,11 @@ import com.coep.puneet.boilerplate.UI.Adapter.CategoryGridAdapter;
 
 import org.codepond.wizardroid.WizardStep;
 
+import java.util.HashMap;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * This step will block the user from proceeding to the next step
@@ -27,7 +31,33 @@ public class AddProductStep1_category extends WizardStep
 {
 
     @Bind(R.id.category_grid_view) GridView categoryGridview;
+    @OnClick(R.id.say) void speak() {
+        tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
+        {
+            @Override
+            public void onInit(int status)
+            {
+                if (status == TextToSpeech.SUCCESS && tts != null) {
+
+                    say(getString(R.string.description_select_category));
+                    //
+                    // OnUtteranceCompletedListener
+                    //
+
+                    //noinspection deprecation
+                }
+            }
+        });
+    }
+
+    private void say(final String s) {
+        final HashMap<String, String> map = new HashMap<String, String>(1);
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, AddProductActivity.class.getName());
+        tts.speak(s, TextToSpeech.QUEUE_FLUSH, map);
+    }
     int selectedIndex = -1;
+    TextToSpeech tts;
+
 
     //You must have an empty constructor for every step
     public AddProductStep1_category()

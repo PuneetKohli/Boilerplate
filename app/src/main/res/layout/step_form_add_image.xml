@@ -7,20 +7,35 @@
                 android:orientation="vertical"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
-
+    <LinearLayout
+        android:id="@+id/linearview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/description_upload_image"
+        android:layout_weight="0.2"
         android:textSize="20dp"/>
+
+        <ImageView
+            android:id="@+id/say"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.8"
+            android:src="@android:drawable/ic_btn_speak_now"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/container_layout_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/linearview"
         android:layout_margin="16dp"
         android:orientation="vertical">
 

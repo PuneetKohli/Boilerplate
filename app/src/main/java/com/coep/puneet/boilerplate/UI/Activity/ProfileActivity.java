@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,6 +45,7 @@ public class ProfileActivity extends BaseActivity
     @Bind(R.id.tv_artisan_location) TextView mArtisanLocation;
     @Bind(R.id.tv_artisan_product_count) TextView mArtisanProductCount;
     @Bind(R.id.artisan_profile_image) CircleImageView profileImage;
+    @Bind(R.id.artisan_primary_category) TextView primaryCategory;
     private boolean isEdited = false;
     private Bitmap bm;
     private File f = null;
@@ -111,6 +111,7 @@ public class ProfileActivity extends BaseActivity
         phoneText.setText(ParseUser.getCurrentUser().getString("phone"));
         addressText.setText(ParseUser.getCurrentUser().getString("address"));
         emailText.setText(ParseUser.getCurrentUser().getString("email"));
+        primaryCategory.setText("Bags");
 
         phoneIcon = ButterKnife.findById(PhoneLayout, R.id.profile_item_image);
         emailIcon = ButterKnife.findById(EmailLayout, R.id.profile_item_image);
@@ -153,7 +154,7 @@ public class ProfileActivity extends BaseActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
         builder.setTitle("Edit " + field);
         View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
-        final EditText popupEdittext = (EditText) customDialogView.findViewById(R.id.popup_editText);
+        final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
         final String initialText = textView.getText().toString().trim();
         popupEdittext.setText(initialText);
 

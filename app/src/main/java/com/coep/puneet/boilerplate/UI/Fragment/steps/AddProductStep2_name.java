@@ -4,7 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.v7.app.AppCompatActivity;
+import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -20,6 +20,7 @@ import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 import org.codepond.wizardroid.WizardStep;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,6 +29,31 @@ import butterknife.OnClick;
 public class AddProductStep2_name extends WizardStep
 {
     @Bind(R.id.et_product_name) EditText etProductName;
+    TextToSpeech tts;
+
+    @OnClick(R.id.say) void speak() {
+        tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
+        {
+            @Override
+            public void onInit(int status)
+            {
+                if (status == TextToSpeech.SUCCESS && tts != null) {
+
+                    say(getString(R.string.description_add_name));
+                    //
+                    // OnUtteranceCompletedListener
+                    //
+
+                    //noinspection deprecation
+                }
+            }
+        });
+    }
+    private void say(final String s) {
+        final HashMap<String, String> map = new HashMap<String, String>(1);
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, AddProductActivity.class.getName());
+        tts.speak(s, TextToSpeech.QUEUE_FLUSH, map);
+    }
     @OnClick(R.id.fab_voice_input) void submit() {
         Intent intent = new Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

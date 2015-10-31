@@ -18,22 +18,6 @@ public class AddProductActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener()
-        {
-            @Override
-            public void onInit(int status)
-            {
-                if (status == TextToSpeech.SUCCESS && tts != null) {
-
-                    say("hello world");
-                    //
-                    // OnUtteranceCompletedListener
-                    //
-
-                    //noinspection deprecation
-                }
-            }
-        });
     }
 
     private void say(final String s) {

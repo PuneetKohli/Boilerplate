@@ -1,7 +1,7 @@
 package com.coep.puneet.boilerplate.UI.Fragment.steps;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,8 +15,11 @@ import com.coep.puneet.boilerplate.UI.Activity.AddProductActivity;
 
 import org.codepond.wizardroid.WizardStep;
 
+import java.util.HashMap;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AddProductStep4_price extends WizardStep
 {
@@ -25,7 +28,33 @@ public class AddProductStep4_price extends WizardStep
     @Bind(R.id.et_product_quantity) EditText etQuantity;
     private boolean hasPrice = false, hasQuantity = false;
 
-    //You must have an empty constructor for every step
+    TextToSpeech tts;
+
+    @OnClick(R.id.say) void speak() {
+        tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
+        {
+            @Override
+            public void onInit(int status)
+            {
+                if (status == TextToSpeech.SUCCESS && tts != null) {
+
+                    say(getString(R.string.description_add_price));
+                    //
+                    // OnUtteranceCompletedListener
+                    //
+
+                    //noinspection deprecation
+                }
+            }
+        });
+    }
+    private void say(final String s) {
+        final HashMap<String, String> map = new HashMap<String, String>(1);
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, AddProductActivity.class.getName());
+        tts.speak(s, TextToSpeech.QUEUE_FLUSH, map);
+    }
+
+
     public AddProductStep4_price()
     {
     }
@@ -42,6 +71,15 @@ public class AddProductStep4_price extends WizardStep
         etPrice.setText("0");
         etQuantity.setText("0");
 
+        etPrice.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus)
+            {
+                if(etPrice.getText().toString().equals("0"))
+                    etPrice.setText("");
+            }
+        });
         etPrice.addTextChangedListener(new TextWatcher()
         {
             @Override
@@ -67,6 +105,15 @@ public class AddProductStep4_price extends WizardStep
             }
         });
 
+        etQuantity.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus)
+            {
+                if(etQuantity.getText().toString().equals("0"))
+                    etQuantity.setText("");
+            }
+        });
         etQuantity.addTextChangedListener(new TextWatcher()
         {
             @Override

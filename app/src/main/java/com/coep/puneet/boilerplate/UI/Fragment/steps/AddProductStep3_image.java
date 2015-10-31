@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,6 +79,32 @@ public class AddProductStep3_image extends WizardStep
         containerViewInitial.setVisibility(View.VISIBLE);
         containerViewPreview.setVisibility(View.INVISIBLE);
 
+    }
+
+    TextToSpeech tts;
+
+    @OnClick(R.id.say) void speak() {
+        tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener()
+        {
+            @Override
+            public void onInit(int status)
+            {
+                if (status == TextToSpeech.SUCCESS && tts != null) {
+
+                    say(getString(R.string.description_upload_image));
+                    //
+                    // OnUtteranceCompletedListener
+                    //
+
+                    //noinspection deprecation
+                }
+            }
+        });
+    }
+    private void say(final String s) {
+        final HashMap<String, String> map = new HashMap<String, String>(1);
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, AddProductActivity.class.getName());
+        tts.speak(s, TextToSpeech.QUEUE_FLUSH, map);
     }
 
     //You must have an empty constructor for every step
@@ -135,6 +162,7 @@ public class AddProductStep3_image extends WizardStep
                 imageView.setImageBitmap(bm);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+                ((AddProductActivity) getActivity()).manager.currentBm = bm;
                 byte[] byteArray = stream.toByteArray();
 
                 final ParseFile image = new ParseFile("temp.jpg", byteArray);
@@ -208,8 +236,6 @@ public class AddProductStep3_image extends WizardStep
     private void updateUIForResult(RecognitionResult result) {
         if (result != null) {
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK) {
-                // Display the list of tags in the UI.
-                StringBuilder b = new StringBuilder();
                 for (Tag tag : result.getTags()) {
                     ((AddProductActivity) getActivity()).manager.currentProduct.addProductTags(tag.getName());
                     Log.e("lol", tag.getName());

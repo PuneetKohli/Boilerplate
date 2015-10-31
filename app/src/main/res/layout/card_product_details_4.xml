@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/cardview_product_details_1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="16dp"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/app_accent"
+            android:gravity="left|center_vertical"
+            android:text="Description"
+            android:textAlignment="gravity"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tv_detailed_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="left|center_vertical"
+            android:text="The beautiful textile gets its name from Maheshwar, where it is made. This ancient town situated at the banks of river Narmada even finds mention in the Puranas as a place of great religious importance and is now also synonymous with the beautiful weaves created here. The understated elegance of a 50 dupatta is complemented by the subtle attributes that make it different. The motifs are usually fine abstract representations of local elements like flowers, leaves, and the local architecture. With fine cotton yarns in its weft and silk in the warp, this fabric is light and airy for the summers, yet has the subtle luster of silk."
+            android:textAlignment="gravity"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -3,6 +3,7 @@ package com.coep.puneet.boilerplate.Global;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class AppManager extends Application
 
     ConnectivityManager cm;
     NetworkInfo ni;
+    public Bitmap currentBm;
 
 
     @Override
@@ -47,16 +49,14 @@ public class AppManager extends Application
         currentProduct = new Product();
     }
 
-    private void parseInit()
-    {
+    private void parseInit() {
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Product.class);
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "A2M7yTjp5iULp8xiFXymM29yX2U9bHEKhJdcsJEN", "L7WlExlZM9DoWNQkCCxY8uf7ummyn6cy1yrhnU7U");
     }
 
-    public void getAllCategory()
-    {
+    public void getAllCategory() {
 
         if ((ni != null) && (ni.isConnected()))
         {
@@ -67,14 +67,11 @@ public class AppManager extends Application
                 @Override
                 public void done(final List<Category> list, ParseException e)
                 {
-                    if (e == null)
+                    if(e == null)
                     {
-                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback()
-                        {
-                            public void done(ParseException e)
-                            {
-                                if (e != null)
-                                {
+                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback() {
+                            public void done(ParseException e) {
+                                if (e != null) {
                                     Log.d(LOG_TAG, e.getMessage());
                                     return;
                                 }
@@ -91,21 +88,18 @@ public class AppManager extends Application
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
                     }
-                    else
-                    {
+                    else {
                         Log.d(LOG_TAG, e.getMessage());
                     }
                 }
             });
         }
-        else
-        {
+        else {
             getAllCategoryLocal();
         }
     }
 
-    private void getAllCategoryLocal()
-    {
+    private void getAllCategoryLocal() {
         ParseQuery<Category> query = Category.getQuery();
         query.orderByAscending("category_name");
         query.fromPin("category_list");
@@ -131,8 +125,8 @@ public class AppManager extends Application
         });
     }
 
-    public void loginArtisan(String mobile)
-    {
+    public void loginArtisan(String mobile) {
+
         if ((ni != null) && (ni.isConnected()))
         {
             ParseUser.logInInBackground(mobile, "password", new LogInCallback()

@@ -85,6 +85,19 @@
                         android:textAppearance="@style/Tisser_TextStyle_Small"
                         android:textColor="@android:color/white"/>
 
+                    <TextView
+                        android:id="@+id/artisan_primary_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:maxLines="1"
+                        android:text="Bags"
+                        android:textAppearance="@style/Tisser_TextStyle_Small"
+                        android:textColor="@android:color/white"/>
+
                 </LinearLayout>
 
                 <LinearLayout

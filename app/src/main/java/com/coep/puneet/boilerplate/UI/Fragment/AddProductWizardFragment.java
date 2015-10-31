@@ -22,6 +22,7 @@ import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep1_category;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep2_name;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep3_image;
 import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep4_price;
+import com.coep.puneet.boilerplate.UI.Fragment.steps.AddProductStep_summary;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -81,7 +82,7 @@ public class AddProductWizardFragment extends WizardFragment
 
     public void onStepChanged()
     {
-        String s =  ((AppCompatActivity) getActivity()).getSupportActionBar().getTitle().toString();
+        String s = ((AppCompatActivity) getActivity()).getSupportActionBar().getTitle().toString();
         switch (this.wizard.getCurrentStepPosition())
         {
             case 0:
@@ -97,6 +98,8 @@ public class AddProductWizardFragment extends WizardFragment
             case 3:
                 s = getString(R.string.title_add_product_4);
                 break;
+            case 4:
+                s = getString(R.string.title_add_product_5);
             default:
                 break;
         }
@@ -213,24 +216,6 @@ public class AddProductWizardFragment extends WizardFragment
                     builder.create();
                     builder.show();
                 }
-                else if (tags.size() == 0)
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    LayoutInflater inflater = LayoutInflater.from(getActivity());
-                    View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
-                    final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
-                    popupEdittext.setText("Please Wait for Tags to load");
-                    builder.setTitle("Error");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int whichButton)
-                        {
-                        }
-                    });
-                    builder.setView(customDialogView);
-                    builder.create();
-                    builder.show();
-                }
                 else
                 {
                     this.wizard.goNext();
@@ -274,6 +259,9 @@ public class AddProductWizardFragment extends WizardFragment
                     this.wizard.goNext();
                 }
                 break;
+            case 4:
+                this.wizard.goNext();
+                break;
 
         }
 
@@ -289,16 +277,13 @@ public class AddProductWizardFragment extends WizardFragment
     public WizardFlow onSetup()
     {
         return new WizardFlow.Builder()
-                /*
-                Add your steps in the order you want them to appear and eventually call create()
-                to create the wizard flow.
-                 */.addStep(AddProductStep1_category.class)
-                /*
-                Mark this step as 'required', preventing the user from advancing to the next step
-                until a certain action is taken to mark this step as completed by calling WizardStep#notifyCompleted()
-                from the step.
-                 */.addStep(AddProductStep2_name.class).addStep(AddProductStep3_image.class).addStep(AddProductStep4_price.class).create();
-    }
+                .addStep(AddProductStep1_category.class)
+                .addStep(AddProductStep2_name.class)
+                .addStep(AddProductStep3_image.class)
+                .addStep(AddProductStep4_price.class)
+                .addStep(AddProductStep_summary.class)
+                .create();
+   }
 
     /*
         You'd normally override onWizardComplete to access the wizard context and/or close the wizard
@@ -314,16 +299,12 @@ public class AddProductWizardFragment extends WizardFragment
             @Override
             public void done(ParseException e)
             {
+                ((AddProductActivity) getActivity()).manager.currentArtisanProducts.add(product);
                 ParseUser.getCurrentUser().addUnique("user_products", product);
                 ParseUser.getCurrentUser().saveEventually();
             }
         });
-
-        //... Access context variables here before terminating the wizard
-        //...
-        //String fullname = firstname + lastname;
-        //Store the data in the DB or pass it back to the calling activity
-        getActivity().finish();     //Terminate the wizard
+        getActivity().finish();
     }
 
     public String getNextButtonLabel()

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coep.puneet.boilerplate.Custom.MarginDecoration;
+import com.coep.puneet.boilerplate.Custom.RecyclerItemClickListener;
 import com.coep.puneet.boilerplate.Global.AppConstants;
 import com.coep.puneet.boilerplate.R;
 import com.coep.puneet.boilerplate.UI.Adapter.ProductListAdapter;
@@ -63,6 +64,16 @@ public class ViewProductActivity extends BaseActivity
         mRecyclerView.addItemDecoration(new MarginDecoration(this));
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(View view, int position)
+            {
+                manager.currentProduct = manager.currentArtisanProducts.get(position);
+                navigator.openNewActivity(ViewProductActivity.this, new ProductDetailedActivity());
+            }
+        }));
 
         mProgressBar.setVisibility(View.VISIBLE);
 
