@@ -1,14 +1,14 @@
 package com.coep.puneet.boilerplate.UI.Activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
-import com.coep.puneet.boilerplate.Global.AppConstants;
+import com.cocosw.bottomsheet.BottomSheet;
 import com.coep.puneet.boilerplate.R;
 import com.coep.puneet.boilerplate.UI.Adapter.NavGridAdapter;
 
@@ -19,19 +19,7 @@ public class HomeActivity extends BaseActivity
     @Bind(R.id.category_grid_view) GridView navGrid;
 
 
-    public Integer[] mNavIds = {
-            R.drawable.bs_ic_clear,
-            R.drawable.bs_ic_more,
-            R.drawable.bs_ic_more_light,
-            R.drawable.bs_ic_more_light,
-            R.drawable.bs_ic_more_light,
-            R.drawable.bs_ic_more_light,
-            R.drawable.bs_ic_more_light,
-            R.drawable.bs_ic_more_light
-    };
-
-
-
+    public Integer[] mNavIds = {R.drawable.bs_ic_clear, R.drawable.bs_ic_more, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light, R.drawable.bs_ic_more_light};
 
 
     @Override
@@ -77,11 +65,42 @@ public class HomeActivity extends BaseActivity
                     case 1:
                         navigator.openNewActivity(HomeActivity.this, new AddProductActivity());
                         break;
+                    case 2:
+                        setLanguage();
+                        break;
                     case 3:
                         navigator.openNewActivity(HomeActivity.this, new ProfileActivity());
                         break;
                 }
             }
         });
+    }
+
+    private void setLanguage()
+    {
+        new BottomSheet.Builder(this).title("Change Language").sheet(R.menu.menu_change_language).listener(new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                switch (which)
+                {
+                    case R.id.english:
+                        //manager.setLocale("en");
+                        //restartActivity();
+                        break;
+                    case R.id.hindi:
+                        //manager.setLocale("hi");
+                        //restartActivity();
+                        break;
+                }
+            }
+        }).show();
+    }
+
+    private void restartActivity() {
+        overridePendingTransition(0, 0);
+        finish();
+        startActivity(getIntent());
     }
 }
