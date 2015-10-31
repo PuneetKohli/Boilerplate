@@ -1,6 +1,5 @@
 package com.coep.puneet.boilerplate.UI.Activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,16 +15,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.coep.puneet.boilerplate.Global.AppConstants;
+import com.coep.puneet.boilerplate.ParseObjects.Product;
 import com.coep.puneet.boilerplate.R;
 import com.parse.ParseFile;
-import com.parse.ParseUser;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,7 +32,8 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class ProfileActivity extends BaseActivity
+
+public class ArtisanProfileActivity extends BaseActivity
 {
 
     @Bind(R.id.appbar) AppBarLayout mAppBarLayout;
@@ -102,16 +101,21 @@ public class ProfileActivity extends BaseActivity
     protected void setupLayout()
     {
         manager.delegate = this;
-        mArtisanProductCount.setText("" + manager.currentArtisanProducts.size());
-        mArtisanName.setText(ParseUser.getCurrentUser().getString("name"));
-        mArtisanLocation.setText("" + ParseUser.getCurrentUser().getString("location"));
+        int size;
+        if(((ArrayList<Product>) manager.currentArtisanSelected.get("user_products")) == null)
+            size = 0;
+        else
+            size = ((ArrayList<Product>) manager.currentArtisanSelected.get("user_products")).size();
+        mArtisanProductCount.setText("" + size);
+        mArtisanName.setText(manager.currentArtisanSelected.getString("name"));
+        mArtisanLocation.setText("" + manager.currentArtisanSelected.getString("location"));
         phoneText = ButterKnife.findById(PhoneLayout, R.id.profile_item_text);
         addressText = ButterKnife.findById(AddressLayout, R.id.profile_item_text);
         emailText = ButterKnife.findById(EmailLayout, R.id.profile_item_text);
-        phoneText.setText(ParseUser.getCurrentUser().getString("phone"));
-        addressText.setText(ParseUser.getCurrentUser().getString("address"));
-        emailText.setText(ParseUser.getCurrentUser().getString("email"));
-        primaryCategory.setText(ParseUser.getCurrentUser().getString("primary_category"));
+        phoneText.setText(manager.currentArtisanSelected.getString("phone"));
+        addressText.setText(manager.currentArtisanSelected.getString("address"));
+        emailText.setText(manager.currentArtisanSelected.getString("email"));
+        primaryCategory.setText(manager.currentArtisanSelected.getString("primary_category"));
 
         phoneIcon = ButterKnife.findById(PhoneLayout, R.id.profile_item_image);
         emailIcon = ButterKnife.findById(EmailLayout, R.id.profile_item_image);
@@ -120,66 +124,13 @@ public class ProfileActivity extends BaseActivity
         emailIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_email));
         addressIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_map_grey_24dp));
 
-        ParseFile profile_image = ParseUser.getCurrentUser().getParseFile("profile_image");
+        ParseFile profile_image = manager.currentArtisanSelected.getParseFile("profile_image");
         Glide.with(this).load(profile_image.getUrl()).asBitmap().centerCrop().placeholder(R.drawable.background_material).into(profileImage);
     }
 
     String field = "";
     TextView textView = null;
 
-    @OnClick({R.id.profile_address_layout, R.id.profile_email_layout, R.id.profile_phone_layout})
-    public void showDetailFillAlert(LinearLayout view)
-    {
-
-        if (view == PhoneLayout)
-        {
-            field = "Phone number";
-            textView = phoneText;
-        }
-        else if (view == AddressLayout)
-        {
-            field = "Address";
-            textView = addressText;
-        }
-        else if (view == EmailLayout)
-        {
-            field = "Email";
-            textView = emailText;
-        }
-
-        //AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-
-        // Setting Dialog Title
-        LayoutInflater inflater = LayoutInflater.from(ProfileActivity.this);
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-        builder.setTitle("Edit " + field);
-        View customDialogView = inflater.inflate(R.layout.profile_popup_edit_details, null, false);
-        final TextView popupEdittext = (TextView) customDialogView.findViewById(R.id.popup_editText);
-        final String initialText = textView.getText().toString().trim();
-        popupEdittext.setText(initialText);
-
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int whichButton)
-            {
-                if (popupEdittext.getText().toString().trim().length() == 0)
-                {
-                    Toast.makeText(ProfileActivity.this, "You can not leave this field Blank!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    if (!initialText.equals(popupEdittext.getText().toString().trim()))
-                    {
-                        isEdited = true;
-                    }
-                    textView.setText(popupEdittext.getText().toString());
-                }
-            }
-        });
-        builder.setView(customDialogView);
-        builder.create();
-        builder.show();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -199,7 +150,6 @@ public class ProfileActivity extends BaseActivity
 
         if (id == R.id.action_profile_picture)
         {
-            changeImage();
             return true;
         }
         else if (id == android.R.id.home)

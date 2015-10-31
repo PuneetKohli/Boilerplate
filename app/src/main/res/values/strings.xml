@@ -35,6 +35,7 @@
     <string name="home_button_8">Other</string>
     <string name="title_add_product_5">Product Preview</string>
     <string name="title_activity_product_detailed">ProductDetailedActivity</string>
+    <string name="title_activity_artisan_search">ArtisanSearch</string>
     <string name="change_language">Change Language</string>
 
 </resources>

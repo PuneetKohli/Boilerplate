@@ -76,6 +76,8 @@ public class HomeActivity extends BaseActivity
                     case 3:
                         navigator.openNewActivity(HomeActivity.this, new ProfileActivity());
                         break;
+                    case 4:
+                        navigator.openNewActivity(HomeActivity.this, new ArtisanSearch());
                 }
             }
         });

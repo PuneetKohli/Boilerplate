@@ -2,21 +2,18 @@ package com.coep.puneet.boilerplate.Global;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.coep.puneet.boilerplate.ParseObjects.Category;
 import com.coep.puneet.boilerplate.ParseObjects.Product;
-import com.coep.puneet.boilerplate.R;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -38,6 +35,7 @@ public class AppManager extends Application
 
     public ArrayList<Category> productCategories = new ArrayList<>();
     public ArrayList<Product> currentArtisanProducts = new ArrayList<>();
+    public ArrayList<ParseUser> artisanList = new ArrayList<>();
     public Product currentProduct;
     public AsyncResponse delegate = null;
 
@@ -47,6 +45,7 @@ public class AppManager extends Application
     ConnectivityManager cm;
     NetworkInfo ni;
     public Bitmap currentBm;
+    public ParseUser currentArtisanSelected;
 
 
     @Override
@@ -102,8 +101,7 @@ public class AppManager extends Application
         Parse.initialize(this, "A2M7yTjp5iULp8xiFXymM29yX2U9bHEKhJdcsJEN", "L7WlExlZM9DoWNQkCCxY8uf7ummyn6cy1yrhnU7U");
     }
 
-    public void getAllCategory()
-    {
+    public void getAllCategory() {
 
         if ((ni != null) && (ni.isConnected()))
         {
@@ -114,14 +112,11 @@ public class AppManager extends Application
                 @Override
                 public void done(final List<Category> list, ParseException e)
                 {
-                    if (e == null)
+                    if(e == null)
                     {
-                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback()
-                        {
-                            public void done(ParseException e)
-                            {
-                                if (e != null)
-                                {
+                        ParseObject.unpinAllInBackground("category_list", list, new DeleteCallback() {
+                            public void done(ParseException e) {
+                                if (e != null) {
                                     Log.d(LOG_TAG, e.getMessage());
                                     return;
                                 }
@@ -138,21 +133,18 @@ public class AppManager extends Application
                         delegate.processFinish(LOG_TAG, AppConstants.RESULT_CATEGORY_LIST);
 
                     }
-                    else
-                    {
+                    else {
                         Log.d(LOG_TAG, e.getMessage());
                     }
                 }
             });
         }
-        else
-        {
+        else {
             getAllCategoryLocal();
         }
     }
 
-    private void getAllCategoryLocal()
-    {
+    private void getAllCategoryLocal() {
         ParseQuery<Category> query = Category.getQuery();
         query.orderByAscending("category_name");
         query.fromPin("category_list");
@@ -178,8 +170,8 @@ public class AppManager extends Application
         });
     }
 
-    public void loginArtisan(String mobile)
-    {
+    public void loginArtisan(String mobile) {
+
         if ((ni != null) && (ni.isConnected()))
         {
             ParseUser.logInInBackground(mobile, "password", new LogInCallback()
@@ -268,6 +260,43 @@ public class AppManager extends Application
             //getAllProductsFromCurrentArtisanOffline();
         }
     }
+
+    public void getAllArtisans()
+    {
+        if ((ni != null) && (ni.isConnected()))
+        {
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.include("user_products");
+            query.include("user_products.product_category");
+            query.whereEqualTo("is_artisan", true);
+
+            query.findInBackground(new FindCallback<ParseUser>()
+            {
+                @Override
+                public void done(final List<ParseUser> artisan, ParseException e)
+                {
+                    if (e == null)
+                    {
+                        for (int i = 0; i < artisan.size(); i++)
+                        {
+                            if (!artisan.get(i).getUsername().equals(ParseUser.getCurrentUser().getUsername()))
+                                artisanList.add(artisan.get(i));
+                        }
+                        delegate.processFinish("manager", AppConstants.RESULT_ARTISAN);
+                    }
+                    else
+                    {
+                        //getAllProductsFromCurrentArtisanOffline();
+                    }
+                }
+            });
+        }
+        else
+        {
+            //getAllProductsFromCurrentArtisanOffline();
+        }
+    }
+
 
     private void getAllProductsFromCurrentArtisanOffline()
     {

@@ -21,6 +21,7 @@ public final class AppConstants
     public static final String RESULT_PRODUCT_LIST_ERROR = "resultProductListError";
     public static final String RESULT_LOGIN_SUCCESS = "resultLoginSuccess";
     public static final String RESULT_LOGIN_FAIL = "resultLoginFail";
+    public static final String RESULT_ARTISAN = "resultArtisanList";
 
 
     public static final String RESULT_SUBCATEGORY_NAME = "resultSubCategoryName";
@@ -47,5 +48,6 @@ public final class AppConstants
     public static final int EDIT_PRODUCT = 0;
 
     public static final int IMAGE_RESIZE_DIMEN = 800;
+
 
 }
