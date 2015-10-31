@@ -37,5 +37,6 @@
     <string name="title_activity_product_detailed">ProductDetailedActivity</string>
     <string name="title_activity_artisan_search">ArtisanSearch</string>
     <string name="change_language">Change Language</string>
+    <string name="title_activity_maps_activity_event">Map</string>
 
 </resources>

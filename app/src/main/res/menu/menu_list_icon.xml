@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.refocus.puneet.axishackathon.Activities.LoginActivity">
+    <item android:id="@+id/action_list"
+          android:title="List View"
+          android:orderInCategory="100"
+          android:icon = "@android:drawable/ic_menu_view"
+          app:showAsAction="always"/>
+</menu>
